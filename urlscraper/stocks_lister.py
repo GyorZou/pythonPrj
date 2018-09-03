@@ -67,14 +67,12 @@ def read_companys(filename=file_name):
         return list
 
 def read_all(filename=file_name):
-    with open(filename, 'r') as csvfile:
+    with open(filename, 'r',encoding='gb18030') as csvfile:
         reader = csv.reader(csvfile)
         list = []
         for row in reader:
             list.append(row[0]) #第一个元素
 
-        print("total",len(list))
-        print("list",list[0])
         return list
 
 

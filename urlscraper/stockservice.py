@@ -74,7 +74,7 @@ if __name__ == "__main__":
     timecounter.begin()
 
     list = stocks_lister.read_companys("hotstocks.csv") #stocks_lister.read_all()
-    list = list[:100]
+    list = list[:1000]
     timecounter.total = len(list)
     timecounter.updateprogress()
 

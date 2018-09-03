@@ -42,7 +42,9 @@ class Crawler:
         selector.register(sock.fileno(), EVENT_WRITE, on_connected)
         yield f
         selector.unregister(sock.fileno())
-        get = 'GET {0} HTTP/1.0\r\nHost: example.com\r\n\r\n'.format(self.url)
+        #https://www.futunn.com/quote/stock-news?m=hk&code=
+        get = 'GET {0} HTTP/1.1\r\nHost: example.com\r\n\r\n'.format(self.url)
+        get = 'GET /quote/stock-news?m=hk&code=00101 HTTP/1.0\r\nHost: futunn.com\r\n\r\n'
         sock.send(get.encode('ascii'))
 
         global stopped
@@ -58,7 +60,7 @@ class Crawler:
             if chuck:
                 self.response += chuck
             else:
-                print("finished url:{0} with result:\n{1}".format(url, self.response.decode("utf-8")))
+                print("finished url:{0} with result:\n{1}".format(get, self.response.decode("utf-8")))
                 urls_todo.remove(self.url)
                 if not urls_todo:
                     stopped = True

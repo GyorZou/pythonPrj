@@ -4,8 +4,10 @@ from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE
 selectors = DefaultSelector()
 done = False
 
-urls_todo = list(map(lambda x: r"/" + str(x), range(1, 10)))
-
+urls_todo = list(map(lambda x: str(x).zfill(5), range(1, 10)))
+urls_todo = ["/","/","/"]
+host="futunn.com"
+host ="example.com"
 
 class Future:
     def __init__(self):
@@ -85,9 +87,12 @@ class WebFetcher:
         return b''.join(resp)
 
     def fetch(self):
-        sock = yield from self.connect(('example.com', 80))
+        sock = yield from self.connect((host, 80))
 
-        get = "GET {0} HTTP/1.0\r\n Host: example.com\r\n\r\n".format(self.url)
+        url_todo = "/quote/stock-news?m=hk&code=" + self.url
+
+        url_todo = self.url
+        get = "GET {0} HTTP/1.1\r\n Host: {1}\r\n\r\n".format(url_todo,host)
         sock.send(get.encode("utf-8"))
         self.response = yield from self.read(sock)
 

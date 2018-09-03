@@ -10,6 +10,9 @@ loop = asyncio.get_event_loop()
 
 context = ssl._create_unverified_context()
 
+
+
+
 async def fetch(url):
     print("fetching",url)
 
